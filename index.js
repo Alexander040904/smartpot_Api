@@ -1,5 +1,5 @@
 const express = require("express");
-const home = require("./routes/insetUser");
+const insertUser = require("./routes/insetUser");
 
 // Middlewares
 const app = express();
@@ -7,7 +7,7 @@ const app = express();
 
 // Routes
 
-app.use("/home", home);
+app.use("/insertUser", insertUser);
 
 
 
