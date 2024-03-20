@@ -9,6 +9,16 @@ const app = express();
 
 app.use("/home", home);
 
+app.get("/pata", async (req, res) => {
+  try {
+    
+    res.send("todo ok");
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send("Error interno del servidor");
+  }
+});
+
 // connection
 const port = process.env.PORT || 9001;
 app.listen(port, () => console.log(`Listening to port ${port}`));
