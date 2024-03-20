@@ -6,6 +6,7 @@ const app = express();
 
 
 // Routes
+app.use("/", home);
 app.use("/home", home);
 
 // connection
