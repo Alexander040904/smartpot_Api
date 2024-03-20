@@ -1,14 +1,12 @@
 const express = require("express");
-const homeRouter = require("./routes/insetUser");
+const home = require("./routes/insetUser");
 
 // Middlewares
 const app = express();
 
-// CORS
-app.use(cors());
 
 // Routes
-app.use("/home", homeRouter);
+app.use("/home", home);
 
 // connection
 const port = process.env.PORT || 9001;
