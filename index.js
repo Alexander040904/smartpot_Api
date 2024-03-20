@@ -7,7 +7,7 @@ const app = express();
 
 // Routes
 app.use("/", home);
-app.use("./home", home);
+app.use("/home", home);
 
 // connection
 const port = process.env.PORT || 9001;
