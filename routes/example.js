@@ -9,6 +9,7 @@ const app = express();
 app.use(cors()); // Esto permitirá todas las solicitudes CORS
 
 app.use(bodyParser.urlencoded({ extended: false }));
+console.log("llego");
 
 router.post('/', (req, res) => {
     // Aquí puedes acceder a los datos del formulario enviados
