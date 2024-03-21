@@ -4,9 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 
-const app = express();
 
-app.use(cors()); // Esto permitirá todas las solicitudes CORS
 
 app.use(bodyParser.urlencoded({ extended: false }));
 console.log("llego");
