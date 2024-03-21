@@ -5,14 +5,14 @@ const app = express();
 
 router.post('/', (req, res) => {
     // Aquí puedes acceder a los datos del formulario enviados
-    const formData = req.body.email;
+    const formData = req.body;
     
     console.log(formData);
     // Realiza acciones en base a los datos recibidos
     // Por ejemplo, enviar un correo electrónico, guardar en una base de datos, etc.
     
     // Envía una respuesta al cliente
-    res.send(formData);
+    res.json(formData);
   });
 
   router.get('/', (req, res) => {
