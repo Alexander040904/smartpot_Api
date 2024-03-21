@@ -23,4 +23,9 @@ router.post('/', (req, res) => {
     res.send('Formulario enviado exitosamente');
   });
 
+  router.get('/', (req, res) => {
+    res.send('Esta es la ruta para enviar formularios. Debes enviar una solicitud POST con datos de formulario.');
+});
+
+
   module.exports = router;
