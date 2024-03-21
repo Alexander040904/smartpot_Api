@@ -9,7 +9,7 @@ const app = express();
 
 // Middleware cors global
 app.use(cors());
-app.use(express.json());
+
 
 
 // Routes

@@ -8,19 +8,20 @@ const app = express();
 
 app.use(cors()); // Esto permitirá todas las solicitudes CORS
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 console.log("llego");
 
 router.post('/', (req, res) => {
     // Aquí puedes acceder a los datos del formulario enviados
-    const formData = req.body;
+    const formData = req.body.email;
     
     console.log(formData);
     // Realiza acciones en base a los datos recibidos
     // Por ejemplo, enviar un correo electrónico, guardar en una base de datos, etc.
     
     // Envía una respuesta al cliente
-    res.json(formData);
+    res.send(formData);
   });
 
   router.get('/', (req, res) => {
