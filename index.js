@@ -1,5 +1,5 @@
 const express = require("express");
-const home = require("./routes/insetUser");
+const insertUser = require("./routes/insetUser");
 
 // Middlewares
 const cors = require('cors'); // Importar cors aquí
@@ -11,7 +11,10 @@ app.use(cors());
 
 
 // Routes
-app.use("/home", home);
+
+app.use("/insertUser", insertUser);
+
+
 
 // connection
 const port = process.env.PORT || 9001;
