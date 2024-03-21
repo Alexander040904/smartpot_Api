@@ -1,11 +1,17 @@
 const express = require("express");
 const insertUser = require("./routes/insetUser");
 const example = require("./routes/example");
+const bodyParser = require('body-parser');
+
 
 // Middlewares
 const cors = require('cors'); // Importar cors aquí
 
 const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Middleware de análisis de cuerpo para application/json
+app.use(bodyParser.json());
 
 // Middleware cors global
 app.use(cors());
