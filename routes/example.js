@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
     // Por ejemplo, enviar un correo electrónico, guardar en una base de datos, etc.
     
     // Envía una respuesta al cliente
-    res.send('Formulario enviado '+ formData);
+    res.send('Formulario enviado ' + JSON.stringify(formData));
   });
 
   router.get('/', (req, res) => {
