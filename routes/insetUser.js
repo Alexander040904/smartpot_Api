@@ -43,9 +43,9 @@ async function run(datos) {
     // El documento que deseas insertar
     const documento = {
       gmail: datos.gmail,
-      imgUsuario:  datos.imgUsuario,
+      password:  datos.password,
       type: datos.type,
-      contrasena: datos.contrasena
+      img: datos.contrasena
       // ... otros campos y valores
     };
 
@@ -66,7 +66,7 @@ async function run(datos) {
   }
 }
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const datos = req.query;
     await run(datos);
