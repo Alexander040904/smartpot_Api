@@ -1,15 +1,3 @@
-/*const express = require("express");
-const router = express.Router();
-
-router.get("/", async (req, res, next) => {
-  return res.status(200).json({
-    title: "Express Testing",
-    message: "The app is working properly!",
-  });
-});
-
-module.exports = router;*/
-
 const express = require("express");
 const router = express.Router();
 const cors = require('cors');
@@ -18,10 +6,8 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const app = express();
 app.use(cors()); // Esto permitirá todas las solicitudes CORS
 
-
 const uri = "mongodb+srv://halcorporation40:151081halco@smarpot.iddzpk2.mongodb.net/?retryWrites=true&w=majority&appName=smarpot";
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -30,53 +16,53 @@ const client = new MongoClient(uri, {
   }
 });
 
-async function run(datos) {
+async function connectToDatabase() {
   try {
-    
-    // Connect the client to the server (optional starting in v4.7)
     await client.connect();
-
-    // Obtener la referencia a la base de datos y colección que deseas usar
-    const database = client.db("smarpot");
-    const collection = database.collection("usuarios");
-
-    // El documento que deseas insertar
-    const documento = {
-      gmail: datos.gmail,
-      password:  datos.password,
-      type: datos.type,
-      img: datos.contrasena
-      // ... otros campos y valores
-    };
-
-    // Insertar el documento en la colección
-    const resultado = await collection.insertOne(documento);
-    console.log(`Se insertó correctamente el documento con el ID: ${resultado.insertedId}`);
-    
-
-    /*
-    const cursor = collection.find({campo2: "huaci"});
-    const documentos = await cursor.toArray();
-    documentos.forEach(doc => {
-      console.log(doc.campo2);
-    });*/
-  } finally {
-    // Asegurarse de cerrar la conexión cuando hayas terminado o si hay algún error
-    await client.close();
+    console.log("Conexión exitosa a la base de datos");
+  } catch (error) {
+    console.error("Error al conectar a la base de datos:", error);
+    process.exit(1);
   }
+}
+
+async function validateUser(data) {
+    const database = client.db("smarpot").collection("usuarios");
+    const cursor = database.find({ gmail: data.gmail });
+    const documentos = await cursor.toArray();
+    return documentos.length > 0;
+}
+
+async function insertUser(data) {
+    const equalUsers = await validateUser(data);
+    if (!equalUsers) {
+      const database = client.db("smarpot").collection("usuarios");
+      const resultado = await database.insertOne(data);
+      console.log(`Se insertó correctamente el documento con el ID: ${resultado.insertedId}`);
+      return resultado.insertedId != null ? "Se insertó correctamente" : "Cagaste, no funciona";
+    } else {
+      console.log("Gmail existe");
+      return "El gmail existe";
+    }
 }
 
 router.post("/", async (req, res) => {
   try {
-    const datos = req.body;
-    console.log(datos);
-    await run(datos);
-    
-    res.send("todo ok");
+    const data = req.body;
+    console.log(data);
+    const control = await insertUser(data);
+    res.send(control);
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send("Error interno del servidor");
   }
+});
+
+connectToDatabase().catch(console.error);
+
+process.on('SIGINT', async () => {
+  await client.close();
+  process.exit();
 });
 
 module.exports = router;
