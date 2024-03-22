@@ -68,7 +68,8 @@ async function run(datos) {
 
 router.post("/", async (req, res) => {
   try {
-    const datos = req.query;
+    const datos = req.body;
+    console.log(datos);
     await run(datos);
     
     res.send("todo ok");
