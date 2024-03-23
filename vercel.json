@@ -22,6 +22,10 @@
         {
             "src": "/showUser",
             "dest": "/"   
+        },
+        {
+            "src": "/login",
+            "dest": "/"   
         }
     ]
 }
