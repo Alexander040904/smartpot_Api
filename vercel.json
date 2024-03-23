@@ -18,6 +18,10 @@
         {
             "src": "/example",
             "dest": "/"   
+        },
+        {
+            "src": "/showUser",
+            "dest": "/"   
         }
     ]
 }
