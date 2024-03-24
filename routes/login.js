@@ -6,8 +6,8 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const app = express();
 app.use(cors()); // Esto permitirá todas las solicitudes CORS
 
-const uri = "mongodb+srv://halcorporation40:151081halco@smarpot.iddzpk2.mongodb.net/?retryWrites=true&w=majority&appName=smarpot";
-
+//const uri = "mongodb+srv://halcorporation40:151081halco@smarpot.iddzpk2.mongodb.net/?retryWrites=true&w=majority&appName=smarpot";
+const uri = "mongodb://localhost:27017/";
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -50,14 +50,11 @@ async function validateForType(data) {
     }
 }
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
     try {
-      const persona = {
-        gmail: "papo@gmail.com",
-        password: "fh"
-      };
+        const data = req.body;
       
-      const control = await validateForType(persona);
+      const control = await validateForType(data);
       console.log(control);
       res.json(control);
     } catch (error) {

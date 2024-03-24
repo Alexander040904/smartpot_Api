@@ -3,6 +3,7 @@ const insertUser = require("./routes/insetUser");
 const example = require("./routes/example");
 const showUser = require("./routes/showUser");
 const login = require("./routes/login");
+const updateUser = require("./routes/updateUser");
 const bodyParser = require('body-parser');
 const cors = require('cors'); // Importar cors aquí
 
@@ -24,6 +25,7 @@ app.use("/insertUser", insertUser);
 app.use("/example", example);
 app.use("/showUser", showUser);
 app.use("/login", login);
+app.use("/updateUser", updateUser);
 
 
 // connection

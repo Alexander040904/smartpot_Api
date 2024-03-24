@@ -26,6 +26,12 @@
         {
             "src": "/login",
             "dest": "/"   
+        },
+        {
+            "src": "/updateUser",
+            "dest": "/"   
         }
+
+
     ]
 }

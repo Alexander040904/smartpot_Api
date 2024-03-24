@@ -29,6 +29,7 @@ async function connectToDatabase() {
 async function validateUser(data) {
     const database = client.db("smarpot").collection("usuarios");
     const cursor = database.find({ gmail: data.gmail });
+    
     const documentos = await cursor.toArray();
     return documentos.length > 0;
 }
@@ -37,9 +38,9 @@ async function insertUser(data) {
     const equalUsers = await validateUser(data);
     if (!equalUsers) {
       const database = client.db("smarpot").collection("usuarios");
-      const resultado = await database.insertOne(data);
-      console.log(`Se insertó correctamente el documento con el ID: ${resultado.insertedId}`);
-      return resultado.insertedId != null ? "Se insertó correctamente" : "Cagaste, no funciona";
+      const resultado = await database.updateOne({gmail: data.gmail}, {$set:{data}})
+      
+      return resultado.insertedId != null ? "Se actualizo correctamente" : "Cagaste, no actualizo";
     } else {
       console.log("Gmail existe");
       return "El gmail existe";

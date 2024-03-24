@@ -6,8 +6,8 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const app = express();
 app.use(cors()); // Esto permitirá todas las solicitudes CORS
 
-const uri = "mongodb+srv://halcorporation40:151081halco@smarpot.iddzpk2.mongodb.net/?retryWrites=true&w=majority&appName=smarpot";
-
+//const uri = "mongodb+srv://halcorporation40:151081halco@smarpot.iddzpk2.mongodb.net/?retryWrites=true&w=majority&appName=smarpot";
+const uri = "mongodb://localhost:27017/";
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -38,12 +38,12 @@ async function showUser(gmail){
 
 }
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
     try {
-      //const data = req.body;
-      //console.log(data);
+      const data = req.body;
+      console.log(data.gmail);
 
-      const control = await showUser("ramirezortegajonathanalexander@gmail.com");
+      const control = await showUser(data.gmail);
       res.json(control);
     } catch (error) {
       console.error("Error:", error);
@@ -59,4 +59,3 @@ router.get("/", async (req, res) => {
   });
   
   module.exports = router;
-  
