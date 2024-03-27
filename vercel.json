@@ -30,6 +30,10 @@
         {
             "src": "/updateUser",
             "dest": "/"   
+        },
+        {
+            "src": "/check",
+            "dest": "/"   
         }
 
 

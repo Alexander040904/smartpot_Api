@@ -4,6 +4,7 @@ const example = require("./routes/example");
 const showUser = require("./routes/showUser");
 const login = require("./routes/login");
 const updateUser = require("./routes/updateUser");
+const check = require("./routes/check");
 const bodyParser = require('body-parser');
 const cors = require('cors'); // Importar cors aquí
 
@@ -19,13 +20,14 @@ app.use(cors());
 
 
 
-// Routes
+// Routes check
 
 app.use("/insertUser", insertUser);
 app.use("/example", example);
 app.use("/showUser", showUser);
 app.use("/login", login);
 app.use("/updateUser", updateUser);
+app.use("/check", check);
 
 
 // connection

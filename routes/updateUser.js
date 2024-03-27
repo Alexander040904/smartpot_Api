@@ -36,11 +36,11 @@ async function validateUser(data) {
 
 async function insertUser(data) {
     const equalUsers = await validateUser(data);
-    if (!equalUsers) {
+    if (!equalUsers || data.gmail == data.originGmail) {
       const database = client.db("smarpot").collection("usuarios");
-      const resultado = await database.updateOne({gmail: data.gmail}, {$set:{data}})
+      const resultado = await database.updateOne({gmail: data.originGmail}, {$set:{name:data.name, gmail:data.gmail, password:data.password}})
       
-      return resultado.insertedId != null ? "Se actualizo correctamente" : "Cagaste, no actualizo";
+      return "Se actualizo correctamente";
     } else {
       console.log("Gmail existe");
       return "El gmail existe";
