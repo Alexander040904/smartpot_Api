@@ -6,8 +6,8 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const app = express();
 app.use(cors()); // Esto permitirá todas las solicitudes CORS
 
-//const uri = "mongodb+srv://halcorporation40:151081halco@smarpot.iddzpk2.mongodb.net/?retryWrites=true&w=majority&appName=smarpot";
-const uri = "mongodb://localhost:27017/";
+const uri = "mongodb+srv://halcorporation40:151081halco@smarpot.iddzpk2.mongodb.net/?retryWrites=true&w=majority&appName=smarpot";
+//const uri = "mongodb://localhost:27017/";
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,

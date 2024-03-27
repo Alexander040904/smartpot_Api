@@ -4,7 +4,9 @@ const cors = require('cors');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const app = express();
 app.use(cors()); // Esto permitirá todas las solicitudes CORS
-const url = 'mongodb://localhost:27017';
+
+
+const url = "mongodb+srv://halcorporation40:151081halco@smarpot.iddzpk2.mongodb.net/?retryWrites=true&w=majority&appName=smarpot";
 
 // Opciones de conexión
 const options = {
@@ -25,7 +27,13 @@ async function watchDatabase() {
 
     // Configurar el observador de cambios
     const changeStream = collection.watch();
-    
+    changeStream.on('change', (change) => {
+
+      if(change.operationType == "update"){
+        console.log('Cambios detectados en la base de datos:');
+      }
+      // Aquí puedes agregar la lógica para manejar los cambios
+    });
 
     // Escuchar los eventos de cambio
  
