@@ -1,0 +1,10 @@
+{
+    "service": "gmail",
+    "auth": {
+      "type": "OAuth2",
+      "user": "halcorporation40@gmail.com",
+      "clientId": "1079496864365-o7jcnrhfcstmr1hi58lbhonarc0dulhu.apps.googleusercontent.com",
+      "clientSecret": "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",
+      "refreshToken": "1//04jwKkBm-4u4SCgYIARAAGAQSNwF-L9IrvHKqkYadfHKGR4przpp-ZMRsXgqRrsUzYPUlQ_VUPnbM9jQ3kKrph8Z9py7hvrZjgJ0"
+    }
+  }
