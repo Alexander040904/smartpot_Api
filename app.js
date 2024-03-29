@@ -38,6 +38,6 @@ transporter.sendMail(mailOptions, function(error, info){
     if (error) {
         console.error('Error al enviar el correo:', error);
     } else {
-        console.log('Correo enviado con éxito:', info.response);
+        console.log('Correo enviado con éxit:', info.response);
     }
 });
