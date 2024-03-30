@@ -15,7 +15,7 @@ const options = {
 };
 
 async function configureReplicaSet() {
-  const client = new MongoClient(url, options);
+  const client = new MongoClient(url, options);0
 
   try {
     await client.connect();
