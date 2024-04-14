@@ -6,9 +6,7 @@ const login = require("./routes/login");
 const updateUser = require("./routes/updateUser");
 const check = require("./routes/check");
 const validateGmail = require("./routes/validateGmail");
-
-const check = require("./routes/insertSmartPot");
-const validateGmail = require("./routes/insertSmartPot");
+const insertSmartPot = require("./routes/insertSmartPot");
 
 const bodyParser = require('body-parser');
 const cors = require('cors'); // Importar cors aquí
@@ -34,6 +32,7 @@ app.use("/login", login);
 app.use("/updateUser", updateUser);
 app.use("/check", check);
 app.use("/validateGmail", validateGmail);
+app.use("/insertSmartPot", insertSmartPot);
 
 // connection
 const port = process.env.PORT || 9001;
