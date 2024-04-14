@@ -41,7 +41,7 @@
             "dest": "/"   
         },
         {
-            "src": "/smartPot",
+            "src": "/insertSmartPot",
             "dest": "/"   
         }
 
