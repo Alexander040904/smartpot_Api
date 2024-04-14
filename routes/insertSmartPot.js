@@ -46,7 +46,7 @@ async function insertPots(data) {
 }
 //{"_id":"smart001","brightness":-2,"soilMoisture":0,"waterContainer":1195.848022,"climateHumidity":35,"climateTemperature":36.29999924}
 async function updatePots(data){
-  const database = client.db("smarpot").collection("usuarios");
+  const database = client.db("smarpot").collection("pots");
   const resultado = await database.updateOne({_id: data._id}, {$set:{brightness:data.brightness, soilMoisture:data.soilMoisture, waterContainer:data.waterContainer, climateHumidity:data.climateHumidity, climateTemperature:data.climateTemperature}});
 }
 router.post("/", async (req, res) => {
