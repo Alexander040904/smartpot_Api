@@ -35,9 +35,9 @@ async function showMaceta(idMaceta) {
 router.post("/", async (req, res) => {
     try {
       const data = req.body;
-      console.log(data.gmail);
+      console.log(data._id);
 
-      const control = await showMaceta(data.gmail);
+      const control = await showMaceta(data._id);
       res.json(control);
     } catch (error) {
       console.error("Error:", error);

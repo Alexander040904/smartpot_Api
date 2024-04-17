@@ -43,6 +43,10 @@
         {
             "src": "/insertSmartPot",
             "dest": "/"   
+        },
+        {
+            "src": "/showPots",
+            "dest": "/"   
         }
 
 
