@@ -41,7 +41,7 @@ async function insertUser(data) {
       return resultado.insertedId != null ? "Se insertó correctamente" : "Cagaste, no funciona";
     } else {
       console.log("Gmail existe");
-      return "El gmail existe";
+      return false;
     }
 }
 
