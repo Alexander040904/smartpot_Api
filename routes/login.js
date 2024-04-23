@@ -56,7 +56,7 @@ router.post("/", async (req, res) => {
       
       const control = await validateForType(data);
       console.log(control);
-      res.json(control);
+      res.send(control);
     } catch (error) {
       console.error("Error:", error);
       res.status(500).send("Error interno del servidor");
