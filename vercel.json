@@ -55,7 +55,12 @@
         {
             "src": "/addPots",
             "dest": "/"   
+        },
+        {
+            "src": "/compare",
+            "dest": "/"   
         }
+
 
 
     ]

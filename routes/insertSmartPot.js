@@ -40,14 +40,27 @@ async function insertPots(data) {
       //console.log(`Se insertó correctamente el documento con el ID: ${resultado.insertedId}`);
       return resultado.insertedId != null ? "Se insertó correctamente" : "Cagaste, no funciona";
     } else {
-      await updatePots(data);
-      return "El gmail existe";
+      return await updatePots(data);
     }
 }
 //{"_id":"smart001","brightness":-2,"soilMoisture":0,"waterContainer":1195.848022,"climateHumidity":35,"climateTemperature":36.29999924}
 async function updatePots(data){
+  var diaDeLaSemana = (new Date()).getDay();
+
   const database = client.db("smarpot").collection("pots");
-  const resultado = await database.updateOne({_id: data._id}, {$set:{brightness:data.brightness, soilMoisture:data.soilMoisture, waterContainer:data.waterContainer, climateHumidity:data.climateHumidity, climateTemperature:data.climateTemperature}});
+  const maceta = await database.findOne({ _id: data._id });
+  let brightness = maceta.brightness;
+  brightness[diaDeLaSemana] = data.brightness;
+  let soilMoisture = maceta.soilMoisture;
+  soilMoisture[diaDeLaSemana] = data.soilMoisture;
+  let waterContainer = maceta.waterContainer;
+  waterContainer[diaDeLaSemana] = data.waterContainer;
+  let climateHumidity = maceta.climateHumidity;
+  climateHumidity[diaDeLaSemana] = data.climateHumidity;
+  let climateTemperature = maceta.climateTemperature;
+  climateTemperature[diaDeLaSemana] = data.climateTemperature;
+  const resultado = await database.updateOne({_id: data._id}, {$set:{brightness:brightness, soilMoisture:soilMoisture, waterContainer:waterContainer, climateHumidity:climateHumidity, climateTemperature:climateTemperature}});
+  return resultado;
 }
 router.post("/", async (req, res) => {
   try {

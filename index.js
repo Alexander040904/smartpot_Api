@@ -10,6 +10,7 @@ const insertSmartPot = require("./routes/insertSmartPot");
 const showPots = require("./routes/showPots");
 const showPlantas = require("./routes/showPlantas");
 const addPots = require("./routes/addPots");
+const compare = require("./routes/compare");
 
 
 const bodyParser = require('body-parser');
@@ -40,6 +41,7 @@ app.use("/insertSmartPot", insertSmartPot);
 app.use("/showPots", showPots);
 app.use("/showPlantas", showPlantas);
 app.use("/addPots", addPots);
+app.use("/compare", compare);
 
 
 
