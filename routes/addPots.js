@@ -52,7 +52,7 @@ router.post("/", async (req, res) => {
     const data = req.body;
     console.log(data);
     const control = await insertUser(data);
-    res.send(control);
+    res.json(control);
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send("Error interno del servidor");
