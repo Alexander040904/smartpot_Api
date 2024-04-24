@@ -47,6 +47,10 @@
         {
             "src": "/showPots",
             "dest": "/"   
+        },
+        {
+            "src": "/showPlantas",
+            "dest": "/"   
         }
 
 

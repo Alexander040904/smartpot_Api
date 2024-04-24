@@ -8,6 +8,7 @@ const check = require("./routes/check");
 const validateGmail = require("./routes/validateGmail");
 const insertSmartPot = require("./routes/insertSmartPot");
 const showPots = require("./routes/showPots");
+const showPlantas = require("./routes/showPlantas");
 
 const bodyParser = require('body-parser');
 const cors = require('cors'); // Importar cors aquí
@@ -35,6 +36,9 @@ app.use("/check", check);
 app.use("/validateGmail", validateGmail);
 app.use("/insertSmartPot", insertSmartPot);
 app.use("/showPots", showPots);
+app.use("/showPlantas", showPlantas);
+
+
 
 
 // connection
