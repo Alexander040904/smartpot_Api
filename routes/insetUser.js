@@ -38,7 +38,7 @@ async function insertUser(data) {
       const database = client.db("smarpot").collection("usuarios");
       const resultado = await database.insertOne(data);
       console.log(`Se insertó correctamente el documento con el ID: ${resultado.insertedId}`);
-      return resultado.insertedId != null ? "Se insertó correctamente" : "Cagaste, no funciona";
+      return resultado.insertedId != null ? true : "Cagaste, no funciona";
     } else {
       console.log("Gmail existe");
       return false;
