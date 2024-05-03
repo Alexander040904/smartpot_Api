@@ -26,10 +26,15 @@ async function connectToDatabase() {
   }
 }
 
-async function showMaceta(idMaceta) {
-    const database = client.db("smarpot").collection("plantas");
-    const maceta = await database.findOne({ _id: idMaceta });
-    return maceta;
+async function showMaceta(idPots) {
+    const database = client.db("smarpot").collection("pots");
+    const maceta = await database.findOne({ _id: idPots });
+    return await showPlantas(maceta)
+}
+async function showPlantas(idMaceta) {
+  const database = client.db("smarpot").collection("plantas");
+  const maceta = await database.findOne({ _id: idMaceta._idPlanta });
+  return maceta;
 }
 
 router.post("/", async (req, res) => {
