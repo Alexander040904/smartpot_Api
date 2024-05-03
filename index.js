@@ -11,6 +11,7 @@ const showPots = require("./routes/showPots");
 const showPlantas = require("./routes/showPlantas");
 const addPots = require("./routes/addPots");
 const compare = require("./routes/compare");
+const addRiego = require("./routes/addRiego");
 
 
 const bodyParser = require('body-parser');
@@ -42,6 +43,7 @@ app.use("/showPots", showPots);
 app.use("/showPlantas", showPlantas);
 app.use("/addPots", addPots);
 app.use("/compare", compare);
+app.use("/addRiego", addRiego);
 
 
 

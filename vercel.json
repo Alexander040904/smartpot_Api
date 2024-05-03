@@ -59,6 +59,10 @@
         {
             "src": "/compare",
             "dest": "/"   
+        },
+        {
+            "src": "/addRiego",
+            "dest": "/"   
         }
 
 
