@@ -47,7 +47,20 @@
         {
             "src": "/showPots",
             "dest": "/"   
+        },
+        {
+            "src": "/showPlantas",
+            "dest": "/"   
+        },
+        {
+            "src": "/addPots",
+            "dest": "/"   
+        },
+        {
+            "src": "/compare",
+            "dest": "/"   
         }
+
 
 
     ]

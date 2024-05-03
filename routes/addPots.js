@@ -5,6 +5,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 
 const app = express();
 app.use(cors()); // Esto permitirá todas las solicitudes CORS
+
 const uri = "mongodb+srv://halcorporation40:151081halco@smarpot.iddzpk2.mongodb.net/?retryWrites=true&w=majority&appName=smarpot";
 //const uri = "mongodb://localhost:27017/";
 const client = new MongoClient(uri, {
@@ -28,20 +29,21 @@ async function connectToDatabase() {
 async function validateUser(data) {
     const database = client.db("smarpot").collection("usuarios");
     const cursor = database.find({ gmail: data.gmail });
+    
     const documentos = await cursor.toArray();
     return documentos.length > 0;
 }
 
 async function insertUser(data) {
     const equalUsers = await validateUser(data);
-    if (!equalUsers) {
+    if (!equalUsers || data.gmail == data.originGmail) {
       const database = client.db("smarpot").collection("usuarios");
-      const resultado = await database.insertOne(data);
-      console.log(`Se insertó correctamente el documento con el ID: ${resultado.insertedId}`);
-      return resultado.insertedId != null ? true : "Cagaste, no funciona";
+      const resultado = await database.updateOne({gmail: data.originGmail}, {$push: {pots: data.pots }});
+      
+      return "Se actualizo correctamente";
     } else {
       console.log("Gmail existe");
-      return false;
+      return "El gmail existe";
     }
 }
 
@@ -50,7 +52,7 @@ router.post("/", async (req, res) => {
     const data = req.body;
     console.log(data);
     const control = await insertUser(data);
-    res.send(control);
+    res.json(control);
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send("Error interno del servidor");
