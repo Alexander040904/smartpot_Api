@@ -51,8 +51,8 @@ async function updatePots(data) {
   const maceta = await database.findOne({ _id: data._id });
   
   let contador = maceta.contador;
-  let sume = contador[diaDeLaSemana] + data.contador;
-  const resultado = await database.updateOne({ _id: data._id }, { $set: { contador: sume} });
+  contador[diaDeLaSemana] = contador[diaDeLaSemana]+ data.contador;
+  const resultado = await database.updateOne({ _id: data._id }, { $set: { contador: contador} });
   return resultado;
 }
 router.post("/", async (req, res) => {
