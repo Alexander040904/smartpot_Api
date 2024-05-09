@@ -12,7 +12,7 @@ router.post('/', (req, res) => {
     // Por ejemplo, enviar un correo electrónico, guardar en una base de datos, etc.
     
     // Envía una respuesta al cliente
-    res.json(formData);
+    res.send("te comunicastes desde verce" + formData.name);
   });
 
   router.get('/', (req, res) => {
