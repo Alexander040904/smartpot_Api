@@ -6,64 +6,75 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const app = express();
 app.use(cors()); // Esto permitirá todas las solicitudes CORS
 
-const uri = "mongodb+srv://halcorporation40:151081halco@smarpot.iddzpk2.mongodb.net/?retryWrites=true&w=majority&appName=smarpot";
-//const uri = "mongodb://localhost:27017/";
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
+import { useState, useEffect } from 'react';
 
-async function connectToDatabase() {
-  try {
-    await client.connect();
-    console.log("Conexión exitosa a la base de datos");
-  } catch (error) {
-    console.error("Error al conectar a la base de datos:", error);
-    process.exit(1);
-  }
-}
+const initialUsers = ['Tú', 'Yair', 'Jesús'];
 
-async function validateUser(data) {
-    const database = client.db("smarpot").collection("usuarios");
-    const cursor = database.find({ gmail: data.gmail });
-    
-    const documentos = await cursor.toArray();
-    return documentos.length > 0;
-}
+export default function Home() {
+  const [turns, setTurns] = useState(initialUsers);
+  const [currentTurn, setCurrentTurn] = useState(turns[0]);
 
-async function insertUser(data) {
-    const equalUsers = await validateUser(data);
-    if (!equalUsers || data.gmail == data.originGmail) {
-      const database = client.db("smarpot").collection("usuarios");
-      const resultado = await database.updateOne({gmail: data.originGmail}, {$push: {pots: data.pots }});
-      
-      return "Se actualizo correctamente";
-    } else {
-      console.log("Gmail existe");
-      return "El gmail existe";
+  useEffect(() => {
+    const storedTurns = JSON.parse(localStorage.getItem('turns'));
+    if (storedTurns) {
+      setTurns(storedTurns);
+      setCurrentTurn(storedTurns[0]);
     }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('turns', JSON.stringify(turns));
+  }, [turns]);
+
+  const handleConfirm = () => {
+    const newTurns = [...turns.slice(1), turns[0]]; // mover el turno actual al final
+    setTurns(newTurns);
+    setCurrentTurn(newTurns[0]);
+  };
+
+  const handlePostpone = () => {
+    const newTurns = [...turns.slice(1), turns[0]]; // el turno actual se mueve al final
+    setTurns(newTurns);
+    setCurrentTurn(newTurns[0]);
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
+      <h1 className="text-4xl font-bold mb-4">¿A quién le toca traer el agua?</h1>
+      <div className="p-4 bg-white shadow-lg rounded-lg">
+        <p className="text-xl mb-2">Hoy le toca: <strong>{currentTurn}</strong></p>
+        <div className="flex space-x-4">
+          <button 
+            onClick={handleConfirm} 
+            className="bg-green-500 text-white px-4 py-2 rounded-lg"
+          >
+            Confirmar
+          </button>
+          <button 
+            onClick={handlePostpone} 
+            className="bg-red-500 text-white px-4 py-2 rounded-lg"
+          >
+            Posponer
+          </button>
+        </div>
+      </div>
+      <div className="mt-8">
+        <h2 className="text-2xl">Próximos turnos:</h2>
+        <ul className="mt-2">
+          {turns.slice(1).map((user, index) => (
+            <li key={index} className="text-lg">{user}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
 }
 
-router.post("/", async (req, res) => {
-  try {
-    const data = req.body;
-    console.log(data);
-    const control = await insertUser(data);
-    res.json(control);
-  } catch (error) {
-    console.error("Error:", error);
-    res.status(500).send("Error interno del servidor");
-  }
-});
 
-connectToDatabase().catch(console.error);
 
-process.on('SIGINT', async () => {
-  await client.close();
-  process.exit();
-});
+
+
+
+
 
 module.exports = router;
